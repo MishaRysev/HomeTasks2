@@ -15,7 +15,8 @@ public:
 	
 	friend ostream& operator << (ostream& out, const Group& group);
 
-	void search(string& param, int type) const;
+	Student* get_stud(int num) const { return studs[num]; }
+	int* search(string& param, int type, int& fc) const;
 	int in_group(const Student& st) const;
 	void add(const Student& st);
 	void remove(const Student& st);

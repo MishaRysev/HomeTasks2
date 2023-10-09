@@ -35,31 +35,47 @@ ostream& operator << (ostream& out, const Group& group) {
 	return out;
 }
 
-void Group::search(string& param, int type) const {
+int* Group::search(string& param, int type, int& fc) const {
 	DoB *dt = nullptr;
-	int flag = 0;
+	int* mas = nullptr;
+	if (cnt == 0) return mas;
 	if (type == 4) dt = new DoB(param);
 	for (int i = 0; i < cnt; i++) {
-		if (type == 4){
-			if (studs[i]->date == *dt) cout << *studs[i];
-			flag += 1;
+		if (type == 4) {
+			if (studs[i]->date == *dt) fc += 1;
+		}
+		else {
+				if (studs[i]->name == param && type == 1) fc += 1;
+				else if (studs[i]->surname == param && type == 2) fc += 1;
+				else if (studs[i]->phone == param && type == 3) fc += 1;
+			}
+		}
+	if (fc == 0) return mas;
+	mas = new int[fc];
+	int j = 0;
+	for (int i = 0; i < cnt; i++) {
+		if (type == 4) {
+			if (studs[i]->date == *dt){ 
+				mas[j] = i;
+				j += 1;
+			}
 		}
 		else {
 			if (studs[i]->name == param && type == 1) {
-				cout << *studs[i];
-				flag += 1;
+				mas[j] = i;
+				j += 1;
 			}
 			else if (studs[i]->surname == param && type == 2) {
-				cout << *studs[i];
-				flag += 1;
+				mas[j] = i;
+				j += 1;
 			}
 			else if (studs[i]->phone == param && type == 3) {
-				cout << *studs[i];
-				flag += 1;
+				mas[j] = i;
+				j += 1;
 			}
 		}
 	}
-	if (flag == 0) cout << "Not found\n";
+	return mas;
 }
 
 int Group::in_group(const Student& st) const {

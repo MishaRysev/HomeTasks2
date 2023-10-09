@@ -25,8 +25,14 @@ void actions() {
 	cout << "Choose action(enter number):\n";
 	cout << "  1. Print group   3. Add student\n  2. Find student  4. Remove student\n";
 }
+
+void find_print(Group& group, int* mas, int fc) {
+	for (int i = 0; i < fc; i++) cout << *group.get_stud(mas[i]);
+}
+
 void finding(Group& group) {
-	int num;
+	int num, find_count = 0;
+	int* mas;
 	string param;
 	cout << "Enter number of the type of search:\n";
 	cout << "  1. By name      3. By phone\n  2. By surname   4. By date\n>> ";
@@ -37,7 +43,10 @@ void finding(Group& group) {
 	else if (num == 4) cout << "Enter date: ";
 	else cout << "Not found";
 	cin >> param;
-	group.search(param, num);
+	mas = group.search(param, num, find_count);
+	if (mas != nullptr) find_print(group, mas, find_count);
+	else cout << "Student not found\n";
+	delete[] mas;
 }
 void student_data(Student& tmp) {
 	cout << "Enter name: "; cin >> tmp.name;
