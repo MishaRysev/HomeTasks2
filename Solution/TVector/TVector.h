@@ -22,7 +22,7 @@ public:
 		for (int i = 0; i < vec.count; i++) out << vec.arr[i] << " ";
 		return out;
 	}
-	friend float cos(TVector<T>& a, TVector<T>& b) {
+	friend double cos(TVector<T>& a, TVector<T>& b) {
 		float res = (a * b) / (a.length() * b.length());
 		return res;
 	}
@@ -98,7 +98,7 @@ TVector<T>& TVector<T>::operator -= (const TVector<T>& vec) {
 }
 
 template<typename T>
-TVector<T>& TVector<T>::operator*= (T num) {
+TVector<T>& TVector<T>::operator *= (T num) {
 	for (int i = 0; i < count; i++) arr[i] *= num;
 	return (*this);
 }
